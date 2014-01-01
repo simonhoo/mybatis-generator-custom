@@ -28,6 +28,11 @@ public class MixedMapperGenerator extends XMLMapperGenerator {
     protected void addSelectByPrimaryKeyElement(XmlElement parentElement) {
         return;
     }
+    
+    @Override
+    protected void addSelectByCdtElement(XmlElement parentElement) {
+    	return;
+    }
 
     @Override
     protected void addDeleteByPrimaryKeyElement(XmlElement parentElement) {
