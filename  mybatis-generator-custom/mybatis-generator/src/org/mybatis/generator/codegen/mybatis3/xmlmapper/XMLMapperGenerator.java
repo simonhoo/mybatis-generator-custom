@@ -34,6 +34,7 @@ import org.mybatis.generator.codegen.mybatis3.xmlmapper.elements.InsertElementGe
 import org.mybatis.generator.codegen.mybatis3.xmlmapper.elements.InsertSelectiveElementGenerator;
 import org.mybatis.generator.codegen.mybatis3.xmlmapper.elements.ResultMapWithBLOBsElementGenerator;
 import org.mybatis.generator.codegen.mybatis3.xmlmapper.elements.ResultMapWithoutBLOBsElementGenerator;
+import org.mybatis.generator.codegen.mybatis3.xmlmapper.elements.SelectByCdtElementGenerator;
 import org.mybatis.generator.codegen.mybatis3.xmlmapper.elements.SelectByExampleWithBLOBsElementGenerator;
 import org.mybatis.generator.codegen.mybatis3.xmlmapper.elements.SelectByExampleWithoutBLOBsElementGenerator;
 import org.mybatis.generator.codegen.mybatis3.xmlmapper.elements.SelectByPrimaryKeyElementGenerator;
@@ -75,6 +76,9 @@ public class XMLMapperGenerator extends AbstractXmlGenerator {
         addSelectByExampleWithBLOBsElement(answer);
         addSelectByExampleWithoutBLOBsElement(answer);
         addSelectByPrimaryKeyElement(answer);
+        //@Nothing-add
+        addSelectByCdtElement(answer);
+        
         addDeleteByPrimaryKeyElement(answer);
         addDeleteByExampleElement(answer);
         addInsertElement(answer);
@@ -156,6 +160,14 @@ public class XMLMapperGenerator extends AbstractXmlGenerator {
             AbstractXmlElementGenerator elementGenerator = new SelectByPrimaryKeyElementGenerator();
             initializeAndExecuteGenerator(elementGenerator, parentElement);
         }
+    }
+    
+    //@Nothing-add
+    protected void addSelectByCdtElement(XmlElement parentElement) {
+    	if (introspectedTable.getRules().generateSelectByPrimaryKey()) {
+    		AbstractXmlElementGenerator elementGenerator = new SelectByCdtElementGenerator();
+    		initializeAndExecuteGenerator(elementGenerator, parentElement);
+    	}
     }
 
     protected void addDeleteByExampleElement(XmlElement parentElement) {

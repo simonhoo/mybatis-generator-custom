@@ -35,6 +35,7 @@ import org.mybatis.generator.codegen.mybatis3.javamapper.elements.DeleteByExampl
 import org.mybatis.generator.codegen.mybatis3.javamapper.elements.DeleteByPrimaryKeyMethodGenerator;
 import org.mybatis.generator.codegen.mybatis3.javamapper.elements.InsertMethodGenerator;
 import org.mybatis.generator.codegen.mybatis3.javamapper.elements.InsertSelectiveMethodGenerator;
+import org.mybatis.generator.codegen.mybatis3.javamapper.elements.SelectByCdtMethodGenerator;
 import org.mybatis.generator.codegen.mybatis3.javamapper.elements.SelectByExampleWithBLOBsMethodGenerator;
 import org.mybatis.generator.codegen.mybatis3.javamapper.elements.SelectByExampleWithoutBLOBsMethodGenerator;
 import org.mybatis.generator.codegen.mybatis3.javamapper.elements.SelectByPrimaryKeyMethodGenerator;
@@ -98,6 +99,9 @@ public class JavaMapperGenerator extends AbstractJavaClientGenerator {
         addSelectByExampleWithBLOBsMethod(interfaze);
         addSelectByExampleWithoutBLOBsMethod(interfaze);
         addSelectByPrimaryKeyMethod(interfaze);
+        //@Nothing-Add
+        addSelectByCdtMethod(interfaze);
+        
         addUpdateByExampleSelectiveMethod(interfaze);
         addUpdateByExampleWithBLOBsMethod(interfaze);
         addUpdateByExampleWithoutBLOBsMethod(interfaze);
@@ -173,6 +177,15 @@ public class JavaMapperGenerator extends AbstractJavaClientGenerator {
             AbstractJavaMapperMethodGenerator methodGenerator = new SelectByPrimaryKeyMethodGenerator(false);
             initializeAndExecuteGenerator(methodGenerator, interfaze);
         }
+    }
+    
+    //@Nothing-Add
+    protected void addSelectByCdtMethod(Interface interfaze) {
+    	//这里我就直接和主键生成绑定吧！懒的写了！
+    	if (introspectedTable.getRules().generateSelectByPrimaryKey()) {
+    		AbstractJavaMapperMethodGenerator methodGenerator = new SelectByCdtMethodGenerator(false);
+    		initializeAndExecuteGenerator(methodGenerator, interfaze);
+    	}
     }
 
     protected void addUpdateByExampleSelectiveMethod(Interface interfaze) {

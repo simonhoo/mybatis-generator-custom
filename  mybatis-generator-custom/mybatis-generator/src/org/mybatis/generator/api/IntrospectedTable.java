@@ -92,7 +92,9 @@ public abstract class IntrospectedTable {
         ATTR_BASE_COLUMN_LIST_ID,
         ATTR_BLOB_COLUMN_LIST_ID,
         ATTR_MYBATIS3_UPDATE_BY_EXAMPLE_WHERE_CLAUSE_ID,
-        ATTR_MYBATIS3_SQL_PROVIDER_TYPE
+        ATTR_MYBATIS3_SQL_PROVIDER_TYPE,
+        //@Nothing-add
+        ATTR_SELECT_BY_CDT_STATEMENT_ID
     }
 
     protected TableConfiguration tableConfiguration;
@@ -524,6 +526,7 @@ public abstract class IntrospectedTable {
         setSelectByExampleStatementId("selectByExample"); //$NON-NLS-1$
         setSelectByExampleWithBLOBsStatementId("selectByExampleWithBLOBs"); //$NON-NLS-1$
         setSelectByPrimaryKeyStatementId("selectByPrimaryKey"); //$NON-NLS-1$
+        setSelectByCdtStatementId("selectByCdt"); //$NON-NLS-1$
         setUpdateByExampleStatementId("updateByExample"); //$NON-NLS-1$
         setUpdateByExampleSelectiveStatementId("updateByExampleSelective"); //$NON-NLS-1$
         setUpdateByExampleWithBLOBsStatementId("updateByExampleWithBLOBs"); //$NON-NLS-1$
@@ -608,6 +611,11 @@ public abstract class IntrospectedTable {
     public void setSelectByPrimaryKeyStatementId(String s) {
         internalAttributes.put(
                 InternalAttribute.ATTR_SELECT_BY_PRIMARY_KEY_STATEMENT_ID, s);
+    }
+    
+    public void setSelectByCdtStatementId(String s) {
+    	internalAttributes.put(
+    			InternalAttribute.ATTR_SELECT_BY_CDT_STATEMENT_ID, s);
     }
 
     public void setSelectByExampleWithBLOBsStatementId(String s) {
@@ -714,6 +722,12 @@ public abstract class IntrospectedTable {
     public String getSelectByPrimaryKeyStatementId() {
         return internalAttributes
                 .get(InternalAttribute.ATTR_SELECT_BY_PRIMARY_KEY_STATEMENT_ID);
+    }
+    
+    //@Nothing-add
+    public String getSelectByCdtStatementId() {
+    	return internalAttributes
+    	.get(InternalAttribute.ATTR_SELECT_BY_CDT_STATEMENT_ID);
     }
 
     public String getSelectByExampleWithBLOBsStatementId() {
